@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="0dp">
+
+    <android.support.v7.widget.CardView
+
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_margin="2dp"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        card_view:cardCornerRadius="2dp">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/imgOrdenProducto"
+                android:src="@mipmap/logo2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+
+                app:civ_border_width="1dp"
+                app:civ_border_color="#FF000000"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/txtProductoNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Carne a la Tampiquenia"
+
+                android:layout_toRightOf="@+id/imgOrdenProducto"
+                android:layout_toEndOf="@+id/imgOrdenProducto" />
+            <TextView
+                android:id="@+id/txtProductoEstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="gravity"
+                android:text="Sin Enviar"
+                android:layout_toStartOf="@+id/txtProductoPrecio"
+                android:layout_below="@+id/txtProductoNombre"
+                android:layout_toRightOf="@+id/imgOrdenProducto"
+                android:layout_toEndOf="@+id/imgOrdenProducto"
+                android:layout_toLeftOf="@+id/txtProductoPrecio" />
+
+            <TextView
+                android:id="@+id/txtProductoPrecio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="125.50"
+
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true" />
+
+            <TextView
+                android:id="@+id/txtProductoCantidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="2"
+
+                android:layout_below="@+id/txtProductoPrecio"
+
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
