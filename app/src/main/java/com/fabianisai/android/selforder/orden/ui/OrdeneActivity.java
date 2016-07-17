@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,12 +16,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fabianisai.android.selforder.R;
 import com.fabianisai.android.selforder.SelfOrderApp;
 import com.fabianisai.android.selforder.lib.glide.GlideImageLoader;
 import com.fabianisai.android.selforder.lib.glide.ImageLoader;
+import com.fabianisai.android.selforder.menus.ui.MenusActivity;
 import com.fabianisai.android.selforder.negocios.ui.NegociosActivity;
 import com.fabianisai.android.selforder.orden.entities.Orden;
 import com.fabianisai.android.selforder.orden.entities.OrdenProducto;
@@ -28,12 +29,10 @@ import com.fabianisai.android.selforder.orden.mvp_clean.OrdenPresenter;
 import com.fabianisai.android.selforder.orden.mvp_clean.OrdenPresenterImpl;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
-import static android.widget.Toast.LENGTH_SHORT;
+import butterknife.OnClick;
 
 public class OrdeneActivity extends AppCompatActivity implements OrdenView {
 
@@ -53,7 +52,9 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
     ProgressBar progressBar;
     @Bind(R.id.container)
     CoordinatorLayout container;
-    
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
+
     private OrdenProductoAdapter adapter;
     private OrdenPresenter presenter;
     private Orden orden;
@@ -67,18 +68,18 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
 
         setupAdapter();
         setupRecyclerView();
-        presenter=new OrdenPresenterImpl(this);
+        presenter = new OrdenPresenterImpl(this);
         setSupportActionBar(toolbar);
         setupNameNegocio();
         presenter.verificaOrden();
-      //  SelfOrderApp.SHARE
+        //  SelfOrderApp.SHARE
     }
 
     private void setupNameNegocio() {
-        sharedPreferences=SelfOrderApp.getSharedPreferences();
-        String nombreNegocio=sharedPreferences.getString(SelfOrderApp.getNegocioDescr(),null);
+        sharedPreferences = SelfOrderApp.getSharedPreferences();
+        String nombreNegocio = sharedPreferences.getString(SelfOrderApp.getNegocioDescr(), null);
 
-        if(nombreNegocio!=null){
+        if (nombreNegocio != null) {
             setTitle(nombreNegocio);
         }
     }
@@ -89,8 +90,8 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
     }
 
     private void setupAdapter() {
-        ImageLoader loader=new GlideImageLoader(this.getApplicationContext());
-        adapter= new OrdenProductoAdapter(new ArrayList<OrdenProducto>(),loader);
+        ImageLoader loader = new GlideImageLoader(this.getApplicationContext());
+        adapter = new OrdenProductoAdapter(new ArrayList<OrdenProducto>(), loader);
     }
 
     @Override
@@ -134,7 +135,7 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
 
     @Override
     public void onOrdenCreate(Orden orden) {
-        Snackbar.make(container,R.string.orden_notice_create, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(container, R.string.orden_notice_create, Snackbar.LENGTH_SHORT).show();
         txtOrden.setText(String.valueOf(orden.getOrdenId()));
         txtStatus.setText(orden.getEstatusDescr());
         txtTotal.setText(String.valueOf(orden.getTotal()));
@@ -142,9 +143,8 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
 
     @Override
     public void onOrdenEnvida() {
-        Snackbar.make(container,R.string.orden_notice_send, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(container, R.string.orden_notice_send, Snackbar.LENGTH_SHORT).show();
     }
-
 
 
     @Override
@@ -176,9 +176,9 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
     }
 
     private void logout() {
-        sharedPreferences=SelfOrderApp.getSharedPreferences();
+        sharedPreferences = SelfOrderApp.getSharedPreferences();
         sharedPreferences.edit().clear().commit();
-     //   Toast.makeText(getApplication() ,"Salio", LENGTH_SHORT).show();
+        //   Toast.makeText(getApplication() ,"Salio", LENGTH_SHORT).show();
         Intent intent = new Intent(this, NegociosActivity.class);
 
         //para que el usuario no pueda darle back
@@ -187,6 +187,12 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 
+    }
+
+    @OnClick(R.id.fab)
+    public void menuProductos(){
+        Intent intent = new Intent(this, MenusActivity.class);
+        startActivity(intent);
     }
 
 }

@@ -20,7 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".orden.ui.OrdeneActivity" android:theme="@style/AppTheme.NoAcctionBar"></activity>
+        <activity
+            android:name=".orden.ui.OrdeneActivity"
+            android:theme="@style/AppTheme.NoAcctionBar" />
+        <activity android:name=".menus.ui.MenusActivity"
+                android:theme="@style/AppTheme.NoAcctionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".orden.ui.OrdeneActivity" />
+        </activity>>
     </application>
 
 </manifest>
