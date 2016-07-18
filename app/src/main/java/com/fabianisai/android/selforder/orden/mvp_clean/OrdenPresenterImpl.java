@@ -7,7 +7,6 @@ import com.fabianisai.android.selforder.lib.eventbus.GreenRobotEventBus;
 import com.fabianisai.android.selforder.orden.entities.Orden;
 import com.fabianisai.android.selforder.orden.events.OrdenEvent;
 import com.fabianisai.android.selforder.orden.ui.OrdenView;
-import com.fabianisai.android.selforder.orden.ui.OrdeneActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.fabianisai.android.selforder.R;
+import com.fabianisai.android.selforder.addProductos.ui.AddProductosFragment;
 import com.fabianisai.android.selforder.menus.entities.Menu;
 import com.fabianisai.android.selforder.menus.mvp_clean.MenusPresenter;
 import com.fabianisai.android.selforder.menus.mvp_clean.MenusPresenterImpl;
@@ -120,6 +121,25 @@ public class MenusActivity extends AppCompatActivity implements MenusView,OnMenu
 
     @Override
     public void onMenusClick(Menu menu) {
+        Bundle bundle=new Bundle();
+        bundle.putInt("menuId",menu.getId());
+        bundle.putString("menuName",menu.getDescripcion());
 
+        AddProductosFragment frag = new AddProductosFragment();
+        frag.setArguments(bundle);
+
+        frag.show(getSupportFragmentManager(), "");
+
+
+
+
+      //  Log.e("oko","click "+menu.getDescripcion());
+       // FragmentManager fragmentManager = getSupportFragmentManager();
+       // AddProductosFragment frag = new AddProductosFragment();
+
+       // FragmentTransaction transaction = fragmentManager.beginTransaction();
+       // transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+       // transaction.add(android.R.id.content, frag, "FullScreenFragment")
+        //        .commit();
     }
 }

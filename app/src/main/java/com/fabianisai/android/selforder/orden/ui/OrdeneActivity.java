@@ -71,8 +71,16 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
         presenter = new OrdenPresenterImpl(this);
         setSupportActionBar(toolbar);
         setupNameNegocio();
+        adapter.deleteAll();
         presenter.verificaOrden();
         //  SelfOrderApp.SHARE
+    }
+
+    @Override
+    protected void onResume() {
+        adapter.deleteAll();
+        presenter.verificaOrden();
+        super.onResume();
     }
 
     private void setupNameNegocio() {

@@ -2,7 +2,6 @@ package com.fabianisai.android.selforder.orden.mvp_clean;
 
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,7 +23,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -88,7 +86,7 @@ public class OrdenRepositoryImpl implements OrdenRepository {
         orden.setUsuarioId(2);
         orden.setEmpleadoId(3);
         orden.setEstatusId(19);  //inicial
-        orden.setEstatusPorUsuarioId(1);
+        orden.setEstatusPorUsuarioId(1);  //temporal
         orden.setIdExterna("0");
         orden.setIdFactura("0");
         orden.setDividida(0);
@@ -241,6 +239,11 @@ public class OrdenRepositoryImpl implements OrdenRepository {
 
     @Override
     public void getProductos(final Orden orden) {
+        final Orden orden1= new Orden();
+        orden1.setOrdenId(orden.getOrdenId());
+        orden1.setNegocioId(orden.getNegocioId());
+        orden1.setTotal(orden.getTotal());
+        orden1.setEstatusDescr(orden.getEstatusDescr());
 
         final ArrayList<OrdenProducto> listInProductos=new ArrayList<>();
 
@@ -280,9 +283,9 @@ public class OrdenRepositoryImpl implements OrdenRepository {
 
                                 }
                     }
-
-                    orden.setProductoList(listInProductos);
-                    post(OrdenEvent.PRODUCTOS_EVENT, orden);
+                    Log.e("oko","cuantos productos "+listInProductos.size());
+                    orden1.setProductoList(listInProductos);
+                    post(OrdenEvent.PRODUCTOS_EVENT, orden1);
 
                 } catch (JSONException e) {
                     post(OrdenEvent.PRODUCTOS_EVENT, e.getMessage());

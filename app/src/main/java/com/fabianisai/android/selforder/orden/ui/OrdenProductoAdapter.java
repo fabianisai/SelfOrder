@@ -33,7 +33,13 @@ public class OrdenProductoAdapter extends RecyclerView.Adapter<OrdenProductoAdap
     }
 
     public void setItems(List<OrdenProducto> newItems) {
+        ordenProductos.clear();
         ordenProductos.addAll(newItems);
+        notifyDataSetChanged();
+    }
+
+    public void deleteAll(){
+        ordenProductos.clear();
         notifyDataSetChanged();
     }
 
