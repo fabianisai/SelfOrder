@@ -67,6 +67,8 @@ public class OrdenRepositoryImpl implements OrdenRepository {
 
     @Override
     public void verificaOrden() {
+
+        Log.e("oko","dentro de verifica");
         //NO se tiene el backend de esta funcion, por lo cual vamos utilizar sharedpreferences,
         // y algunos valores fijos considerados en la BD...
         //mas adelante implementareos el backend correspondiente que traera la ultima orden del usr
@@ -123,9 +125,11 @@ public class OrdenRepositoryImpl implements OrdenRepository {
                 SharedPreferences.Editor editor=sharedPreferences.edit();
                 editor.putInt(SelfOrderApp.getOrdenKey(),orden.getOrdenId());
                 editor.commit();
-
-                post(OrdenEvent.CREA_EVENT,orden);
+                post(OrdenEvent.CREA_EVENT, orden);
+                Log.e("oko","dentro del response crea oko");
             }
+
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -211,6 +215,10 @@ public class OrdenRepositoryImpl implements OrdenRepository {
 
                     orden.setEstatusDescr(estatus);
                     orden.setTotal(total);
+                    Log.e("oko","getorden "+tipo);
+                    if (OrdenEvent.CREATE_READ_EVENT==tipo){
+                        post(OrdenEvent.CREATE_READ_EVENT, orden);
+                    } else{post(OrdenEvent.EXISTS_READ_EVENT, orden); }
 
                 } catch (JSONException e) {
                     if (OrdenEvent.CREATE_READ_EVENT==tipo){
@@ -218,9 +226,7 @@ public class OrdenRepositoryImpl implements OrdenRepository {
                     } else{post(OrdenEvent.EXISTS_READ_EVENT, e.getMessage()); }
 
                 }
-                if (OrdenEvent.CREATE_READ_EVENT==tipo){
-                    post(OrdenEvent.CREATE_READ_EVENT, orden);
-                } else{post(OrdenEvent.EXISTS_READ_EVENT, orden); }
+
 
             }
         }, new Response.ErrorListener() {

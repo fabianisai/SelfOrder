@@ -78,8 +78,8 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
 
     @Override
     protected void onResume() {
-        adapter.deleteAll();
-        presenter.verificaOrden();
+     //   adapter.deleteAll();
+     //   presenter.verificaOrden();
         super.onResume();
     }
 
@@ -147,11 +147,13 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
         txtOrden.setText(String.valueOf(orden.getOrdenId()));
         txtStatus.setText(orden.getEstatusDescr());
         txtTotal.setText(String.valueOf(orden.getTotal()));
+        this.orden=orden;
     }
 
     @Override
     public void onOrdenEnvida() {
         Snackbar.make(container, R.string.orden_notice_send, Snackbar.LENGTH_SHORT).show();
+        refresh();
     }
 
 
@@ -160,7 +162,7 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
         txtOrden.setText(String.valueOf(orden.getOrdenId()));
         txtStatus.setText(orden.getEstatusDescr());
         txtTotal.setText(String.valueOf(orden.getTotal()));
-
+        this.orden=orden;
         adapter.setItems(orden.getProductoList());
     }
 
@@ -178,9 +180,38 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
         if (id == R.id.action_logout) {
             logout();
             return true;
+        }else if(id==R.id.action_refresh){
+            refresh();
+            return true;
+        } else if(id==R.id.action_send){
+            enviaOrden();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void refresh(){
+        presenter.verificaOrden();
+    }
+
+    private void enviaOrden(){
+       // Toast.makeText(getApplication() ,"envia..."+orden.getEstatusDescr(),Toast.LENGTH_SHORT).show();
+
+
+        if (!orden.getEstatusDescr().equals("NUEVA")){
+            Snackbar.make(container, R.string.orden_valida_status, Snackbar.LENGTH_SHORT).show();
+        }else{
+
+            if(orden.getProductoList().size()<=0){
+                Snackbar.make(container, R.string.orden_valida_productosEmpy, Snackbar.LENGTH_SHORT).show();
+            }else {
+                orden.setEstatusDescr("POR ATENDER");
+                presenter.enviaOrden(orden);
+            }
+        }
+
+
     }
 
     private void logout() {
@@ -199,8 +230,14 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
 
     @OnClick(R.id.fab)
     public void menuProductos(){
-        Intent intent = new Intent(this, MenusActivity.class);
-        startActivity(intent);
+
+        if (orden.getEstatusDescr().equals("CANCELADA")||orden.getEstatusDescr().equals("CERRADA")){
+            Snackbar.make(container, R.string.orden_valida_status_addproductos, Snackbar.LENGTH_SHORT).show();
+        }else {
+
+            Intent intent = new Intent(this, MenusActivity.class);
+            startActivity(intent);
+        }
     }
 
 }

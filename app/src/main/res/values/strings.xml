@@ -2,6 +2,15 @@
     <string name="app_name">SelfOrder</string>
     <string name="orden.notice.send">Orden enviada</string>
     <string name="orden.notice.create">Orden asignada</string>
+    <string name="orden.valida.status">La Orden ya fue enviada</string>
+    <string name="orden.valida.productosEmpy">Por Favor agregue por lo menos un producto</string>
+    <string name="orden.valida.status.addproductos">La orden ya se encuntra cancelada/cerrada</string>
+
+    <string name="orden.etiqueta.numorden">Número de Orden</string>
+    <string name="orden.etiqueta.status">Estado</string>
+    <string name="orden.etiqueta.total">Total</string>
+    <string name="orden.etiqueta.msjAddProductos">Agregue productos a la orden</string>
+
     <string name="global.menu.action.logout">Cerrar Sesion</string>
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -32,7 +32,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Número de Orden" />
+        android:text="@string/orden.etiqueta.numorden" />
     <TextView
         android:id="@+id/txtOrden"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -43,7 +43,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Estado" />
+        android:text="@string/orden.etiqueta.status" />
 
     <TextView
         android:id="@+id/txtStatus"
@@ -55,7 +55,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Total" />
+        android:text="@string/orden.etiqueta.total" />
 
     <TextView
         android:id="@+id/txtTotal"
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="15dp"
-        android:text="Agregue productos a la Orden " />
+        android:text="@string/orden.etiqueta.msjAddProductos" />
 </LinearLayout>
 <android.support.v7.widget.RecyclerView
     android:layout_marginTop="225dp"

@@ -45,6 +45,7 @@ public class OrdenPresenterImpl implements OrdenPresenter {
 
     @Override
     public void verificaOrden() {
+        Log.e("oko","presenter verifica");
         if (this.ordenView != null){
             ordenView.hideProductos();
             ordenView.hideOrden();
@@ -74,7 +75,7 @@ public class OrdenPresenterImpl implements OrdenPresenter {
     @Override
     @Subscribe
     public void onEventMainThread(OrdenEvent event) {
-
+        Log.e("oko", "evento "+String.valueOf(event.getType()));
         if (this.ordenView != null) {
             if (this.ordenView != null && (event.getType()!=OrdenEvent.CREATE_READ_EVENT || event.getType()!=OrdenEvent.ENVIA_EVENT || event.getType() == OrdenEvent.PRODUCTOS_EVENT)){
                 this.ordenView.hideProgress();
@@ -88,8 +89,6 @@ public class OrdenPresenterImpl implements OrdenPresenter {
                 if (event.getType() == OrdenEvent.VERIFICA_EVENT) {
                     Orden orden=new Orden();
                     orden=event.getOrden();
-
-                    Log.e("oko","evento VERIFICA_EVENT");
 
                     if (orden.getOrdenId()==null || orden.getOrdenId()==-1){
                         this.ordenInteractor.creaOrden(orden);
