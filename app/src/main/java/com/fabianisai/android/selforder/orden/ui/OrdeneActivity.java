@@ -21,8 +21,8 @@ import com.fabianisai.android.selforder.R;
 import com.fabianisai.android.selforder.SelfOrderApp;
 import com.fabianisai.android.selforder.lib.glide.GlideImageLoader;
 import com.fabianisai.android.selforder.lib.glide.ImageLoader;
+import com.fabianisai.android.selforder.login.ui.LoginActivity;
 import com.fabianisai.android.selforder.menus.ui.MenusActivity;
-import com.fabianisai.android.selforder.negocios.ui.NegociosActivity;
 import com.fabianisai.android.selforder.orden.entities.Orden;
 import com.fabianisai.android.selforder.orden.entities.OrdenProducto;
 import com.fabianisai.android.selforder.orden.mvp_clean.OrdenPresenter;
@@ -218,7 +218,7 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
         sharedPreferences = SelfOrderApp.getSharedPreferences();
         sharedPreferences.edit().clear().commit();
         //   Toast.makeText(getApplication() ,"Salio", LENGTH_SHORT).show();
-        Intent intent = new Intent(this, NegociosActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
 
         //para que el usuario no pueda darle back
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP

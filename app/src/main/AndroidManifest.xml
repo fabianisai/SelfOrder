@@ -14,21 +14,29 @@
         <activity
             android:name=".negocios.ui.NegociosActivity"
             android:theme="@style/AppTheme.NoAcctionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".orden.ui.OrdeneActivity"
             android:theme="@style/AppTheme.NoAcctionBar" />
-        <activity android:name=".menus.ui.MenusActivity"
-                android:theme="@style/AppTheme.NoAcctionBar">
+        <activity
+            android:name=".menus.ui.MenusActivity"
+            android:theme="@style/AppTheme.NoAcctionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".orden.ui.OrdeneActivity" />
-        </activity>>
+        </activity>
+        >
+        <activity android:name=".addUsuario.ui.AddUsuarioActivity" />
+        <activity
+            android:name=".login.ui.LoginActivity"
+            android:theme="@style/AppTheme.NoAcctionBar">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
