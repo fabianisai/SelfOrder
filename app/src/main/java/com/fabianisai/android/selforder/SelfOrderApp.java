@@ -13,6 +13,17 @@ public class SelfOrderApp extends Application {
     private final static String ORDEN_KEY = "orden_id";
     private final static String NEGOCIO_KEY = "negocio_id";
     private final static String NEGOCIO_DESCR = "negocio_descr";
+
+
+    private final static String USER_KEY = "usuario_id";
+
+
+
+    private final static String USER_EMAIL = "usuario_email";
+
+
+
+    private final static String USER_PASS = "usuario_pass";
     private static SelfOrderApp sInstance;
 
     public static SelfOrderApp getInstance() {
@@ -41,6 +52,15 @@ public class SelfOrderApp extends Application {
 
     public static String getNegocioDescr() {
         return NEGOCIO_DESCR;
+    }
+    public static String getUserKey() {
+        return USER_KEY;
+    }
+    public static String getUserPass() {
+        return USER_PASS;
+    }
+    public static String getUserEmail() {
+        return USER_EMAIL;
     }
 }
 
