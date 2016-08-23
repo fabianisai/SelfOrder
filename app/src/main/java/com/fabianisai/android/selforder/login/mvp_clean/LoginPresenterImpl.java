@@ -46,13 +46,13 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
-    public void validateLogin(String email, String password) {
+    public void validateLogin(String email, String password,Integer sesion) {
         if(loginView!=null){
             loginView.disableInputs();
             loginView.showProgress();
         }
 
-        loginInteractor.doSignIn(email,password);
+        loginInteractor.doSignIn(email,password,sesion);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class LoginPresenterImpl implements LoginPresenter {
                 onFailedToRecoverSession();
                 break;
             case LoginEvent.onSessionActive:
-                onSessionActive(event.getUsrEmail(),event.getUsrPass());
+                onSessionActive(event.getUsrEmail(),event.getUsrPass(),event.getUsrSesion());
                 break;
         }
     }
@@ -91,9 +91,9 @@ public class LoginPresenterImpl implements LoginPresenter {
         }
     }
 
-    private void onSessionActive(String usrEmail,String usrPass){
+    private void onSessionActive(String usrEmail,String usrPass,Integer usrIdSesion){
         if(loginView!=null){
-            validateLogin(usrEmail,usrPass);
+            validateLogin(usrEmail,usrPass,usrIdSesion);
         }
     }
 

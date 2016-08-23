@@ -5,7 +5,7 @@ package com.fabianisai.android.selforder.login.mvp_clean;
  */
 
 public interface LoginRepository {
-    void signIn(String email, String password);
+    void signIn(String email, String password,Integer sesion);
     void CheckSession();
     void checkAlreadyAuthenticated();
 }

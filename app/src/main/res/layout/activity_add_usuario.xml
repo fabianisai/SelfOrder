@@ -20,6 +20,7 @@ tools:context="com.fabianisai.android.selforder.addUsuario.ui.AddUsuarioActivity
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableRight="@android:drawable/ic_dialog_email"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:hint="@string/addusuario.message.email"
@@ -40,6 +41,7 @@ tools:context="com.fabianisai.android.selforder.addUsuario.ui.AddUsuarioActivity
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableRight="@android:drawable/ic_secure"
         android:inputType="textPassword"
         android:ems="10"
         android:hint="@string/addusuario.message.password"
@@ -57,6 +59,7 @@ tools:context="com.fabianisai.android.selforder.addUsuario.ui.AddUsuarioActivity
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableRight="@android:drawable/ic_secure"
             android:inputType="textPassword"
             android:ems="10"
             android:hint="@string/addusuario.message.repassword"

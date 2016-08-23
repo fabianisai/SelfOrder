@@ -9,19 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
+import com.fabianisai.android.selforder.R;
 import com.fabianisai.android.selforder.SelfOrderApp;
 import com.fabianisai.android.selforder.lib.glide.GlideImageLoader;
 import com.fabianisai.android.selforder.lib.glide.ImageLoader;
 import com.fabianisai.android.selforder.negocios.entities.Negocio;
-import com.fabianisai.android.selforder.negocios.mvp_clean.NegociosPresenter;
-import com.fabianisai.android.selforder.R;
 import com.fabianisai.android.selforder.negocios.mvp_clean.NegociosPresenterImpl;
 import com.fabianisai.android.selforder.orden.ui.OrdeneActivity;
 
@@ -30,8 +27,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
-import static android.widget.Toast.*;
 
 public class NegociosActivity extends AppCompatActivity implements NegociosView, OnNegocioClickListener {
 
@@ -176,14 +171,7 @@ public class NegociosActivity extends AppCompatActivity implements NegociosView,
 
     private void logout() {
 
-        Toast.makeText(getApplication() ,"Salio", LENGTH_SHORT).show();
-      /*  Intent intent = new Intent(this, LoginActivity.class);
+        SelfOrderApp.getInstance().logout();
 
-        //para que el usuario no pueda darle back
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                | Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        */
     }
 }

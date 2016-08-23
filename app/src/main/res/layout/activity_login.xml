@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/layoutMainContainer"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
@@ -20,6 +21,7 @@ tools:context="com.fabianisai.android.selforder.login.ui.LoginActivity">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableRight="@android:drawable/ic_dialog_email"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:hint="@string/login.message.email"
@@ -40,6 +42,7 @@ tools:context="com.fabianisai.android.selforder.login.ui.LoginActivity">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableRight="@android:drawable/ic_secure"
         android:inputType="textPassword"
         android:ems="10"
         android:hint="@string/login.message.password"
@@ -50,7 +53,7 @@ tools:context="com.fabianisai.android.selforder.login.ui.LoginActivity">
 
 
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:id="@+id/layoutsButtons"
@@ -62,22 +65,46 @@ tools:context="com.fabianisai.android.selforder.login.ui.LoginActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnSignin"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:textAllCaps="false"
+        android:fontFamily="sans-serif" />
 
     <Button
         android:text="@string/login.button.signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnSignup"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:layout_below="@+id/layoutsButtons"
+        android:textAllCaps="false"
+        android:fontFamily="sans-serif" />
+
+
+
 </LinearLayout>
 
-<ProgressBar
+    <ProgressBar
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/progressBar"
     android:layout_below="@id/layoutsButtons"
     android:layout_centerHorizontal="true"
-    android:visibility="gone"
+    android:visibility="visible"
     style="?android:attr/progressBarStyleLarge"/>
+
+    <com.facebook.login.widget.LoginButton
+        facebook:com_facebook_login_text="@string/login.button.facebook.signin"
+        facebook:com_facebook_logout_text="@string/login.button.facebook.signout"
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14.0dp"
+        android:layout_below="@+id/layoutsButtons"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true" />
+
+
+
 </RelativeLayout>

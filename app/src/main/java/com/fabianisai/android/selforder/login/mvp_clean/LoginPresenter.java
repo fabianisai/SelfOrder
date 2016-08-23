@@ -10,7 +10,7 @@ public interface LoginPresenter {
     void onCreate();
     void onDestroy();
     void checkForAuthenticatedUser();
-    void validateLogin(String email, String password);
+    void validateLogin(String email, String password,Integer sesion);
 
     void onEventMainThread(LoginEvent event);
 }

@@ -16,10 +16,15 @@
     <string name="login.message.password">Password</string>
     <string name="login.button.signin">Inicio de Sesión</string>
     <string name="login.button.signup">Crear Cuenta</string>
+    <string name="login.button.facebook.signin">Iniciar con Facebook</string>
+    <string name="login.button.facebook.signout">Cerrar Sesión</string>
     <string name="login.error.message.signin">Imposible iniciar sesion %s</string>
-
+    <string name="login.data.pass.face">face</string>
     <string name="login.error.message.email.novalido">Correo electrónico inválido</string>
     <string name="login.error.message.signin.novalido">Usuario o Password no validos</string>
+    <string name="login.error.message.signin.reset">Su password expiro. Por favor reseteelo</string>
+
+    <string name="login.error.message.signin.facebook.noemail">No se detecto email en su cuenta de facebook</string>
 
     <string name="addusuario.message.email">Correo electrónico</string>
     <string name="addusuario.message.password">Password</string>

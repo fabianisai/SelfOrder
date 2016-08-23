@@ -22,7 +22,7 @@ public class LoginInteractorImpl implements LoginInteractor {
     }
 
     @Override
-    public void doSignIn(String email, String password) {
-        loginRepository.signIn(email,password);
+    public void doSignIn(String email, String password,Integer sesion) {
+        loginRepository.signIn(email,password,sesion);
     }
 }

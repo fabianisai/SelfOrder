@@ -91,7 +91,7 @@ public class AddUsuarioRepositoryImpl implements AddUsuarioRepository {
                         protected Map<String, String> getParams() {
                             SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
                             String sexo="";
-                            String ciudadId="1";
+                            String ciudadId="";
                             String estatusId="1";
                             String dateInString = "1900/01/01";
                             Date fechaNac= null;

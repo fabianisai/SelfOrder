@@ -21,7 +21,6 @@ import com.fabianisai.android.selforder.R;
 import com.fabianisai.android.selforder.SelfOrderApp;
 import com.fabianisai.android.selforder.lib.glide.GlideImageLoader;
 import com.fabianisai.android.selforder.lib.glide.ImageLoader;
-import com.fabianisai.android.selforder.login.ui.LoginActivity;
 import com.fabianisai.android.selforder.menus.ui.MenusActivity;
 import com.fabianisai.android.selforder.orden.entities.Orden;
 import com.fabianisai.android.selforder.orden.entities.OrdenProducto;
@@ -215,16 +214,12 @@ public class OrdeneActivity extends AppCompatActivity implements OrdenView {
     }
 
     private void logout() {
-        sharedPreferences = SelfOrderApp.getSharedPreferences();
-        sharedPreferences.edit().clear().commit();
-        //   Toast.makeText(getApplication() ,"Salio", LENGTH_SHORT).show();
-        Intent intent = new Intent(this, LoginActivity.class);
 
-        //para que el usuario no pueda darle back
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                | Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        //   Toast.makeText(getApplication() ,"Salio", LENGTH_SHORT).show();
+
+        //validar orden activa
+
+        SelfOrderApp.getInstance().logout();
 
     }
 

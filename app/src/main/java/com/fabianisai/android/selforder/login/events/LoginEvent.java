@@ -21,6 +21,10 @@ public class LoginEvent {
     private String usrEmail;
     private String usrPass;
 
+
+
+    private Integer usrSesion;
+
     public int getEventType() {
         return eventType;
     }
@@ -58,5 +62,12 @@ public class LoginEvent {
 
     public void setUsrEmail(String usrEmail) {
         this.usrEmail = usrEmail;
+    }
+    public Integer getUsrSesion() {
+        return usrSesion;
+    }
+
+    public void setUsrSesion(Integer usrSesion) {
+        this.usrSesion = usrSesion;
     }
 }

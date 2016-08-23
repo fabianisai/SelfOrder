@@ -15,6 +15,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "FACEBOOK_PROVIDER_AUTH", project.property('FACEBOOK_PROVIDER') + project.property('FACEBOOK_APP_ID')
+            resValue "string", "FACEBOOK_APP_ID", project.property('FACEBOOK_APP_ID')
+        }
+        debug{
+            resValue "string", "FACEBOOK_PROVIDER_AUTH", project.property('FACEBOOK_PROVIDER') + project.property('FACEBOOK_APP_ID')
+            resValue "string", "FACEBOOK_APP_ID", project.property('FACEBOOK_APP_ID')
         }
     }
 }
@@ -33,6 +39,7 @@ dependencies {
     compile "com.mcxiaoke.volley:library:$rootProject.ext.volleyVersion"
     compile "com.android.support:cardview-v7:$rootProject.ext.supportCardview"
     compile "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+    compile "com.facebook.android:facebook-android-sdk:$rootProject.ext.facebookVersion"
 
 
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha3'

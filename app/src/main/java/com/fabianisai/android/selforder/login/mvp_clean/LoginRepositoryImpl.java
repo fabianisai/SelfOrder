@@ -28,6 +28,8 @@ public class LoginRepositoryImpl implements LoginRepository {
     //
     private static final String URL_VALIDA_USUARIO="https://s-order.herokuapp.com/validaUsuario";
     private static final String KEY_RESULT="result";
+    private static final String KEY_ERROR="error";
+    private static final String KEY_MESSAGE="message";
     private SharedPreferences sharedPreferences;
     private RequestQueue requestQueue;
     private VolleySingleton volleySigleton;
@@ -40,7 +42,7 @@ public class LoginRepositoryImpl implements LoginRepository {
     }
 
     @Override
-    public void signIn(final String email, final String password) {
+    public void signIn(final String email, final String password,final Integer sesion) {
         StringRequest request = new StringRequest(Request.Method.POST,URL_VALIDA_USUARIO, new Response.Listener<String>() {
 
             @Override
@@ -50,20 +52,40 @@ public class LoginRepositoryImpl implements LoginRepository {
                     JSONObject jObjResponse = new JSONObject(response);
 
                     int usrId;
-                    usrId=jObjResponse.getInt(KEY_RESULT);
-                    if(usrId!=-1){
+                    boolean error;
+                    error=jObjResponse.getBoolean(KEY_ERROR);
+                    //
+                    if(!error){
 
-                        sharedPreferences=SelfOrderApp.getSharedPreferences();
-                        SharedPreferences.Editor editor=sharedPreferences.edit();
-                        editor.putInt(SelfOrderApp.getUserKey(),usrId);
-                        editor.putString(SelfOrderApp.getUserPass(),password);
-                        editor.putString(SelfOrderApp.getUserEmail(),email);
-                        editor.commit();
+                        usrId=jObjResponse.getInt(KEY_RESULT);
 
-                        postEvent(LoginEvent.onSignInSuccess);
+                        if (usrId==-1){   //usr/pass no existen o no coincide
+
+                            String errormsg=SelfOrderApp.getInstance().getResources().getString(R.string.login_error_message_signin_novalido);
+                            postEvent(LoginEvent.onSignInError,errormsg);
+
+                        }else if(usrId==-2){
+                                //su pass en la sesion por correo expiro, por favor reseteelo.
+                            String errormsg=SelfOrderApp.getInstance().getResources().getString(R.string.login_error_message_signin_reset);
+                            postEvent(LoginEvent.onSignInError,errormsg);
+                        } else{   //recibe el id de usr
+
+                            sharedPreferences=SelfOrderApp.getSharedPreferences();
+                            SharedPreferences.Editor editor=sharedPreferences.edit();
+                            editor.putInt(SelfOrderApp.getUserKey(),usrId);
+                            editor.putString(SelfOrderApp.getUserPass(),password);
+                            editor.putString(SelfOrderApp.getUserEmail(),email);
+                            editor.putInt(SelfOrderApp.getUserSessionType(),sesion);
+                            editor.commit();
+
+                            postEvent(LoginEvent.onSignInSuccess);
+                        }
+
+
                     }else{
-                        String errormsg=SelfOrderApp.getInstance().getResources().getString(R.string.login_error_message_signin_novalido);
-                        postEvent(LoginEvent.onSignInError,errormsg);
+                        String mensajeError;   //error del backend
+                        mensajeError=jObjResponse.getString(KEY_MESSAGE);
+                        postEvent(LoginEvent.onSignInError,mensajeError);
                     }
 
 
@@ -86,6 +108,7 @@ public class LoginRepositoryImpl implements LoginRepository {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("email", email);
                 params.put("password", password);
+                params.put("sesionId", String.valueOf(sesion));
                 return params;
             }
 
@@ -99,13 +122,15 @@ public class LoginRepositoryImpl implements LoginRepository {
     @Override
     public void CheckSession() {
         String usrEmail,usrPass;
+        Integer usrSesionType;
         sharedPreferences=SelfOrderApp.getSharedPreferences();
         usrEmail=sharedPreferences.getString(SelfOrderApp.getUserEmail(),null);
         usrPass=sharedPreferences.getString(SelfOrderApp.getUserPass(),null);
+        usrSesionType=sharedPreferences.getInt(SelfOrderApp.getUserSessionType(),-1);
 
 
         if(usrEmail!=null){
-            postEvent(LoginEvent.onSessionActive,usrEmail,usrPass);
+            postEvent(LoginEvent.onSessionActive,usrEmail,usrPass,usrSesionType);
         }else{
             postEvent(LoginEvent.onNoSession);
         }
@@ -130,11 +155,12 @@ public class LoginRepositoryImpl implements LoginRepository {
     private void postEvent(int type){
         postEvent(type,null);
     }
-    private void postEvent(int type,String usrEmail,String usrPass){
+    private void postEvent(int type,String usrEmail,String usrPass,Integer sesion){
         LoginEvent loginEvent=new LoginEvent();
         loginEvent.setEventType(type);
         loginEvent.setUsrEmail(usrEmail);
         loginEvent.setUsrPass(usrPass);
+        loginEvent.setUsrSesion(sesion);
 
         EventBus eventBus=GreenRobotEventBus.getInstance();
         eventBus.post(loginEvent);
